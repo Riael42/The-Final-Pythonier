@@ -25,7 +25,7 @@ def main() -> None:
         crew_size=6,
         power_level=85.5,
         oxygen_level=92.3,
-        last_maintenance="2026-10-15T08:30:00",
+        last_maintenance=datetime.fromisoformat("2026-10-15T08:30:00"),
     )
 
     print("Valid station created:")
@@ -34,7 +34,8 @@ def main() -> None:
     print(f"Crew: {station.crew_size} people")
     print(f"Power: {station.power_level}%")
     print(f"Oxygen: {station.oxygen_level}%")
-    print(f"Status: {'Operational' if station.is_operational else 'Not operational'}")
+    status = "Operational" if station.is_operational else "Not operational"
+    print(f"Status: {status}")
     print("=" * 42)
 
     print("\nExpected validation error:")
@@ -45,7 +46,7 @@ def main() -> None:
             crew_size=25,
             power_level=80.0,
             oxygen_level=90.0,
-            last_maintenance="2026-10-15T08:30:00",
+            last_maintenance=datetime.fromisoformat("2026-10-15T08:30:00"),
         )
     except ValidationError as e:
         for error in e.errors():
